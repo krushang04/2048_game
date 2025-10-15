@@ -2,11 +2,7 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {
-      width: {
-        "board-width": "580px",
-      },
-    },
+    extend: {},
   },
   plugins: [],
 };

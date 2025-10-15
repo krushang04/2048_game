@@ -2,8 +2,10 @@ import Board from "./components/Board";
 
 const App = () => {
   return (
-    <div className="bg-white min-h-screen w-screen flex justify-center items-center h-full p-4">
-      <Board />
+    <div className="min-h-screen w-screen bg-white flex items-center justify-center p-4">
+      <div className="w-full max-w-md">
+        <Board />
+      </div>
     </div>
   );
 };

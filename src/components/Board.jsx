@@ -29,10 +29,7 @@ const Board = () => {
     (direction) => {
       if (gameStatus !== "playing") return;
 
-      const { board: newBoard, score: moveScore } = GameLogic.moveBoard(
-        board,
-        direction
-      );
+      const { board: newBoard, score: moveScore } = GameLogic.moveBoard(board, direction);
 
       if (GameLogic.isBoardEqual(board, newBoard)) return;
 
@@ -84,7 +81,7 @@ const Board = () => {
 
   return (
     <div className="bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 flex items-center justify-center p-4">
-      <div className="bg-white/95 backdrop-blur rounded-3xl shadow-2xl p-8 w-board-width">
+      <div className="bg-white/95 backdrop-blur rounded-3xl shadow-2xl p-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
@@ -101,27 +98,16 @@ const Board = () => {
         </div>
 
         {/* Settings Panel */}
-        {showSettings && (
-          <SettingsPanel currentSize={boardSize} onSizeChange={restartGame} />
-        )}
+        {showSettings && <SettingsPanel currentSize={boardSize} onSizeChange={restartGame} />}
 
         {/* Score Board */}
-        <ScoreBoard
-          score={score}
-          bestScore={bestScore}
-          onRestart={() => restartGame()}
-        />
+        <ScoreBoard score={score} bestScore={bestScore} onRestart={() => restartGame()} />
 
         {/* Game Board */}
         <GameBoard board={board} boardSize={boardSize} />
 
         {/* Game Over Modal */}
-        <GameOverModal
-          gameStatus={gameStatus}
-          score={score}
-          onContinue={continueGame}
-          onRestart={() => restartGame()}
-        />
+        <GameOverModal gameStatus={gameStatus} score={score} onContinue={continueGame} onRestart={() => restartGame()} />
 
         {/* Instructions */}
         <div className="text-center text-gray-600 text-sm">
