@@ -84,7 +84,7 @@ const Board = () => {
 
   return (
     <div className="bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 flex items-center justify-center p-4">
-      <div className="bg-white/95 backdrop-blur rounded-3xl shadow-2xl p-8 w-520">
+      <div className="bg-white/95 backdrop-blur rounded-3xl shadow-2xl p-8 w-board-width">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
