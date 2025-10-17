@@ -10,7 +10,7 @@ A modern, responsive implementation of the popular 2048 puzzle game built with R
 - 📱 Responsive design that works on all devices
 - ⚙️ Customizable board size (3x3 to 8x8)
 - 🏆 Score tracking with best score saved in local storage
-- 🎨 Clean, modern UI with theme support
+- 🎨 Clean, modern UI.
 - ⚡ Built with React 18 and Vite for optimal performance
 
 ## 🚀 Getting Started
