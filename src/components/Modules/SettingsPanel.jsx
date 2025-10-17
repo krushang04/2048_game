@@ -8,9 +8,7 @@ const SettingsPanel = ({ currentSize, onSizeChange }) => {
             key={size}
             onClick={() => onSizeChange(size)}
             className={`px-6 py-3 rounded-lg font-bold transition-all hover:scale-105 active:scale-95 ${
-              currentSize === size
-                ? "bg-purple-600 text-white shadow-lg scale-105"
-                : "bg-white text-gray-700 hover:bg-purple-100"
+              currentSize === size ? "bg-purple-600 text-white shadow-lg scale-105" : "bg-white text-gray-700 hover:bg-purple-100"
             }`}
           >
             {size}x{size}

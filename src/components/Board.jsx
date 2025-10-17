@@ -1,57 +1,27 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback, useEffect, useContext } from "react";
 import { Gamepad2, Settings } from "lucide-react";
-import { GameLogic } from "../utils/gameLogic";
+import { GameContext } from "../contexts/GameContext";
 import GameBoard from "./Modules/GameBoard";
 import ScoreBoard from "./Modules/ScoreDisplay";
 import GameOverModal from "./Modules/GameOver";
 import SettingsPanel from "./Modules/SettingsPanel";
 
 const Board = () => {
-  const [boardSize, setBoardSize] = useState(4);
-  const [board, setBoard] = useState(() => GameLogic.initializeBoard(4));
-  const [score, setScore] = useState(0);
-  const [bestScore, setBestScore] = useState(0);
-  const [gameStatus, setGameStatus] = useState("playing");
+  const { board, boardSize, score, bestScore, gameStatus, makeMove, restartGame, setBoardSize: updateBoardSize } = useContext(GameContext);
+
   const [showSettings, setShowSettings] = useState(false);
 
-  const restartGame = useCallback(
-    (size = boardSize) => {
-      setBoard(GameLogic.initializeBoard(size));
-      setScore(0);
-      setGameStatus("playing");
-      setBoardSize(size);
+  const handleRestart = useCallback(() => {
+    restartGame(boardSize);
+    setShowSettings(false);
+  }, [boardSize, restartGame]);
+
+  const handleSizeChange = useCallback(
+    (size) => {
+      updateBoardSize(size);
       setShowSettings(false);
     },
-    [boardSize]
-  );
-
-  const makeMove = useCallback(
-    (direction) => {
-      if (gameStatus !== "playing") return;
-
-      const { board: newBoard, score: moveScore } = GameLogic.moveBoard(board, direction);
-
-      if (GameLogic.isBoardEqual(board, newBoard)) return;
-
-      setTimeout(() => {
-        const boardWithNewTile = GameLogic.addRandomTile(newBoard);
-        setBoard(boardWithNewTile);
-
-        const newScore = score + moveScore;
-        setScore(newScore);
-
-        if (newScore > bestScore) {
-          setBestScore(newScore);
-        }
-
-        if (GameLogic.hasWon(boardWithNewTile) && gameStatus === "playing") {
-          setGameStatus("won");
-        } else if (!GameLogic.hasAvailableMoves(boardWithNewTile)) {
-          setGameStatus("lost");
-        }
-      }, 150);
-    },
-    [board, score, bestScore, gameStatus]
+    [updateBoardSize]
   );
 
   useEffect(() => {
@@ -65,9 +35,10 @@ const Board = () => {
         ArrowRight: "right",
       };
 
-      if (keyMap[e.key]) {
+      const direction = keyMap[e.key];
+      if (direction) {
         e.preventDefault();
-        makeMove(keyMap[e.key]);
+        makeMove(direction);
       }
     };
 
@@ -75,9 +46,9 @@ const Board = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [makeMove, showSettings]);
 
-  const continueGame = () => {
-    setGameStatus("playing");
-  };
+  const continueGame = useCallback(() => {
+    // Game continues automatically in the context
+  }, []);
 
   return (
     <div className="bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 flex items-center justify-center p-4">
@@ -98,16 +69,17 @@ const Board = () => {
         </div>
 
         {/* Settings Panel */}
-        {showSettings && <SettingsPanel currentSize={boardSize} onSizeChange={restartGame} />}
+        {showSettings && <SettingsPanel currentSize={boardSize} onSizeChange={handleSizeChange} />}
 
         {/* Score Board */}
-        <ScoreBoard score={score} bestScore={bestScore} onRestart={() => restartGame()} />
+        <ScoreBoard score={score} bestScore={bestScore} onRestart={handleRestart} />
 
         {/* Game Board */}
+
         <GameBoard board={board} boardSize={boardSize} />
 
         {/* Game Over Modal */}
-        <GameOverModal gameStatus={gameStatus} score={score} onContinue={continueGame} onRestart={() => restartGame()} />
+        <GameOverModal gameStatus={gameStatus} score={score} onContinue={continueGame} onRestart={handleRestart} />
 
         {/* Instructions */}
         <div className="text-center text-gray-600 text-sm">

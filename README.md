@@ -1,16 +1,88 @@
-# React + Vite
+# 2048 Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive implementation of the popular 2048 puzzle game built with React and Vite.
 
-Currently, two official plugins are available:
+![Game Screenshot](/public/screenshot.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🎮 Features
 
-## React Compiler
+- 🎯 Classic 2048 gameplay with smooth animations
+- 📱 Responsive design that works on all devices
+- ⚙️ Customizable board size (3x3 to 8x8)
+- 🏆 Score tracking with best score saved in local storage
+- 🎨 Clean, modern UI with theme support
+- ⚡ Built with React 18 and Vite for optimal performance
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Getting Started
 
-## Expanding the ESLint configuration
+### Prerequisites
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Node.js (v16 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/yourusername/2048-game.git
+   cd 2048-game
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   # or
+   yarn
+   ```
+
+3. Start the development server:
+
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+4. Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+## 🛠️ Built With
+
+- [React](https://reactjs.org/) - JavaScript library for building user interfaces
+- [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling
+- [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework
+- [Lucide Icons](https://lucide.dev/) - Beautiful & consistent icon toolkit
+- [ESLint](https://eslint.org/) - JavaScript linter
+
+## 🎨 Project Structure
+
+```
+src/
+├── assets/           # Static assets like images, fonts, etc.
+├── components/       # Reusable UI components
+│   ├── Modules/      # Game-specific components
+├── contexts/         # React contexts for state management
+├── styles/           # Global styles and themes
+├── utils/            # Utility functions and game logic
+└── App.jsx           # Main application component
+```
+
+## 🤝 Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+## 🙏 Acknowledgments
+
+- [Gabriele Cirulli](https://github.com/gabrielecirulli) for creating the original 2048 game
+- All contributors who have helped improve this project
